@@ -9,7 +9,7 @@ app.use(cors());
 
 let port = process.env.PORT || 3000;
 
-app.get("/produtos", (req, res) => {
+app.get("/animais", (req, res) => {
     executeQuery("SELECT * FROM ANIMAL",[],(err, result) => {
         if(err){        
             return res.status(500).json(err);
@@ -19,8 +19,8 @@ app.get("/produtos", (req, res) => {
     });
 });
 
-app.get("/produtos/:id", (req, res) => {
-    executeQuery("SELECT * FROM PRODUTO WHERE ID=?",[req.params.id],(err, result) => {
+app.get("/animais/:id", (req, res) => {
+    executeQuery("SELECT * FROM ANIMAL WHERE ID=?",[req.params.id],(err, result) => {
         if(err){        
             return res.status(500).json(err);
         } else {
@@ -29,8 +29,8 @@ app.get("/produtos/:id", (req, res) => {
     });
 });
 
-app.delete("/produtos/:id", (req, res) => {
-    executeQuery("DELETE FROM PRODUTO WHERE ID=?",[req.params.id],(err, result) => {
+app.delete("/animais/:id", (req, res) => {
+    executeQuery("DELETE FROM ANIMAL WHERE ID=?",[req.params.id],(err, result) => {
         if(err){        
             return res.status(500).json(err);
         } else {
@@ -39,11 +39,11 @@ app.delete("/produtos/:id", (req, res) => {
     });
 });
 
-app.post("/produtos", (req, res) => {
+app.post("/animais", (req, res) => {
     console.log("banco de dados 1");
-  let sql = "INSERT INTO PRODUTO(DESCRICAO,VALOR,IMAGEM) VALUES(?,?,?)";
+  let sql = "INSERT INTO ANIMAL(NOME,PROPRIETARIO,DTNASCIMENTO) VALUES(?,?,?)";
   if (!req.body.id){
-    executeQuery(sql,[req.body.descricao, req.body.valor, req.body.imagem], function(err, result){
+    executeQuery(sql,[req.body.nome, req.body.proprietario, req.body.dtnascimento], function(err, result){
         if(err){
             console.log(err);
             return res.status(500).json(err); 
@@ -53,8 +53,8 @@ app.post("/produtos", (req, res) => {
         }
     });  
  } else {
-    sql = "UPDATE PRODUTO SET DESCRICAO = ?, VALOR = ?, IMAGEM = ? WHERE ID = ?";
-    executeQuery(sql,[req.body.descricao, req.body.valor, req.body.imagem,req.body.id], function(err, result){
+    sql = "UPDATE ANIMAL SET NOME = ?, PROPRIETARIO = ?, DTNASCIMENTO = ? WHERE ID = ?";
+    executeQuery(sql,[req.body.nome, req.body.proprietario, req.body.dtnascimento,req.body.id], function(err, result){
         if(err){
             console.log(err);
             return res.status(500).json(err); 

@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "cadastroanimais",
   "version": "1.0.0",
   "description": "Sistema que cadastra animais no banco de dados",

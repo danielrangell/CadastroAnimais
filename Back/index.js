@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { executeQuery} from "./Database.js";
+import {executeQuery} from "./Database.js";
 
 const app = express();
 

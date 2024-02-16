@@ -3,8 +3,7 @@ import firebird from "node-firebird";
 const dbOptions = {
   host: "127.0.0.1",
   port: 3050,
-  database:
-    "D:\\IFF\\Hipermidia_2023_2\\CadastroAnimais\\Back\\ClinicaVetBD\\CLINICA.FDB",
+  database:"D:\\IFF\\Hipermidia_2023_2\\CadastroAnimais\\Back\\ClinicaVetBD\\CLINICA.FDB",
   user: "SYSDBA",
   password: "masterkey",
   lowercase_keys: true,

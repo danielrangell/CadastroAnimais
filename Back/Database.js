@@ -4,7 +4,7 @@ const dbOptions = {
   host: "127.0.0.1",
   port: 3050,
   //trocar o caminho do banco de dados para o caminho do banco de dados do seu computador
-  database:"E:\\Hipermidia_2023_2\\CadastroAnimais\\Back\\ClinicaVetBD\\CLINICA.FDB",
+  database: "E:\\Hipermidia_2023_2\\CadastroAnimais\\Back\\ClinicaVetBD\\CLINICA.FDB",
   user: "SYSDBA",
   password: "masterkey",
   lowercase_keys: true,
@@ -22,7 +22,7 @@ function executeQuery(sql, params, callback) {
 
     db.query(sql, params, function (err, result) {
       db.detach();
-      
+
       if (err) {
         return callback(err, []);
       } else {
@@ -33,4 +33,4 @@ function executeQuery(sql, params, callback) {
   });
 }
 
-export { executeQuery/*, dbOptions*/ };
+export { executeQuery };

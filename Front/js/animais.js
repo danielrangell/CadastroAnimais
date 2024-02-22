@@ -1,15 +1,16 @@
 import { BASEURL } from "./const.js";
 
+
 function rowAnim(pAnimal) {
     return `
         <tr>
             <td>${pAnimal.id}</td>
             <td>${pAnimal.nome}</td>
             <td>${pAnimal.proprietario}</td>
-            <td>${pAnimal.dtnascimento}</td>
+            <td>${new Date(pAnimal.dtnascimento).toLocaleDateString('pt-BR')}</td>
             <td> 
-            <button type="button" class="btn btn-primary btn-alterar" data-id=${pAnimal.id} >Alterar</button> 
-            <button type="button" class="btn btn-danger btn-excluir" data-id=${pAnimal.id}>Excluir</button>
+            <button type="button" class="btn-alterar" data-id=${pAnimal.id}>Alterar</button>
+            <button type="button" class="btn-excluir" data-id=${pAnimal.id} id="btnExcluir">Excluir</button>
           </td>
         </tr>
     `;
@@ -77,29 +78,27 @@ function associaEventos() {
                     let anim = anims[0];
                     let frmAnim = document.querySelector("#frmAnim");
                     frmAnim.querySelector("#inpNome").value = anim.nome;
-                    frmAnim.querySelector("#inpdataNascimento").value = anim.dataNascimento;
+                    frmAnim.querySelector("#inpDataNascimento").value = anim.dtnascimento;
                     frmAnim.querySelector("#inpProprietario").value = anim.proprietario;
 
                     frmAnim.dataset.id = anim.id;
-
                     let cadastroAnimal = document.querySelector("#frmCadastroAnimal");
                     $(cadastroAnimal).modal("show");
+
                     console.log(cadastroAnimal);
+
+
                 });
 
         }
     });
-
     let btnsExcluir = document.querySelectorAll(".btn-excluir");
     btnsExcluir.forEach(btn => {
         btn.onclick = (e) => {
+            let btnExcluir = document.querySelector("#btnExcluir");
+            btnExcluir.dataset.id = e.target.dataset.id;
 
-            $("#frmExcluirAnimal").modal("show");
-
-            let btnExcluirModal = document.querySelector("#btnExcluirModal");
-            btnExcluirModal.dataset.id = e.target.dataset.id;
-
-            btnExcluirModal.onclick = (e) => {
+            btnExcluir.onclick = (e) => {
 
                 let id = e.target.dataset.id;
 
@@ -114,11 +113,12 @@ function associaEventos() {
                     .then(resp => {
                         if (resp.toUpperCase() == "OK") {
                             window.location.reload();
-                            $("#frmExcluirAnimal").modal("hide");
 
                         }
                     });
             }
         }
     });
+
+
 }
